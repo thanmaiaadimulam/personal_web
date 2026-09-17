@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Close mobile menu if open
                 const navLinks = document.querySelector('.nav-links');
+                const mobileToggle = document.querySelector('.mobile-toggle');
                 if (navLinks && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
+                    if (mobileToggle) mobileToggle.classList.remove('open');
                 }
             }
         });
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileToggle) {
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            mobileToggle.classList.toggle('open');
         });
     }
 
