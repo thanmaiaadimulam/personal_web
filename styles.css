@@ -1,11 +1,15 @@
 :root {
     /* Muted, warm palette */
-    --bg-color: #F8F6F1; /* Warm linen/off-white */
-    --text-main: #2C2B29; /* Soft charcoal */
-    --text-muted: #6B6965; /* Lighter charcoal */
-    --accent-color: #D36C4F; /* Terracotta / Burnt Orange */
+    --bg-color: #F8F6F1;
+    /* Warm linen/off-white */
+    --text-main: #2C2B29;
+    /* Soft charcoal */
+    --text-muted: #6B6965;
+    /* Lighter charcoal */
+    --accent-color: #D36C4F;
+    /* Terracotta / Burnt Orange */
     --accent-hover: #B5583E;
-    
+
     /* Layout & Styling */
     --radius: 14px;
     --font-sans: 'DM Sans', sans-serif;
@@ -32,18 +36,44 @@ body {
 }
 
 /* Typography Hierarchy */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-weight: 700;
     line-height: 1.1;
     color: var(--text-main);
     letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 1rem; }
-h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 1rem; }
-h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-p { color: var(--text-muted); font-size: 1.125rem; margin-bottom: 1.5rem; max-width: 65ch; }
-p.subtitle { font-size: 1.25rem; font-weight: 500; color: var(--accent-color); margin-bottom: 2rem; }
+h1 {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    max-width: 65ch;
+}
+
+p.subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
 
 /* Components */
 .btn-primary {
@@ -52,7 +82,8 @@ p.subtitle { font-size: 1.25rem; font-weight: 500; color: var(--accent-color); m
     color: #FFF;
     text-decoration: none;
     padding: 1rem 2rem;
-    border-radius: 100px; /* Pill shape for buttons contrasts nicely with rounded rectangles */
+    border-radius: 100px;
+    /* Pill shape for buttons contrasts nicely with rounded rectangles */
     font-weight: 600;
     font-size: 1rem;
     transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out;
@@ -173,23 +204,33 @@ main {
     position: relative;
 }
 
-.placeholder-dark { background-color: #DFDAD1; }
-.placeholder-warm { background-color: #EFE8DC; }
+.placeholder-dark {
+    background-color: #DFDAD1;
+}
+
+.placeholder-warm {
+    background-color: #EFE8DC;
+}
 
 .candid {
     aspect-ratio: 5 / 5;
     width: 100%;
 }
 
-.candid img{
+.candid img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.aspect-video { aspect-ratio: 16 / 9; }
-.aspect-portrait { aspect-ratio: 9 / 16; }
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-portrait {
+    aspect-ratio: 9 / 16;
+}
 
 /* Engineering Grid - Asymmetric Soft Swiss */
 .engineering-grid {
@@ -205,22 +246,48 @@ main {
     gap: 1.5rem;
 }
 
-.project-card.large { grid-column: 1 / 8; }
-.project-card:nth-child(2) { grid-column: 8 / 13; margin-top: 5rem; }
-.project-card.offset { grid-column: 3 / 11; }
-
-.card-image {
-    width: 100%;
-    aspect-ratio: 4/3;
-    border-radius: var(--radius);
-    transition: transform 0.5s ease-in-out;
+/* lets the text block absorb leftover vertical space,
+   so the shorter (landscape) card's bottom still lines up
+   with the taller (portrait) card's bottom */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-.project-card.large .card-image { aspect-ratio: 16/10; }
-.project-card.offset .card-image { aspect-ratio: 21/9; }
+.tag-row {
+    margin-top: auto;
+}
 
-.project-card:hover .card-image {
-    transform: scale(1.02);
+.card-image {
+    position: relative;
+    /* needed for any future overlay/icon */
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    /* clips the img to the rounded corners */
+    border-radius: var(--radius);
+    background-color: #E6E1D8;
+}
+
+/* Portrait subject -> narrower column, taller frame */
+.project-card.portrait-media {
+    grid-column: 1 / 6;
+    /* 5 of 12 cols, ~42% */
+}
+
+.project-card.portrait-media .card-image {
+    aspect-ratio: 4 / 5;
+}
+
+/* Landscape subject -> wider column, shorter frame */
+.project-card.landscape-media {
+    grid-column: 6 / 13;
+    /* 7 of 12 cols, ~58% */
+}
+
+.project-card.landscape-media .card-image {
+    aspect-ratio: 16 / 9;
 }
 
 .tag {
@@ -244,7 +311,8 @@ main {
     display: flex;
     gap: 2.5rem;
     overflow-x: auto;
-    padding: 1rem 0 3rem; /* padding for hover lift and scrollbar */
+    padding: 1rem 0 3rem;
+    /* padding for hover lift and scrollbar */
     margin-top: 3rem;
     /* Custom thin scrollbar */
     scrollbar-width: thin;
@@ -269,9 +337,11 @@ main {
     flex: 0 0 auto;
     width: clamp(260px, 25vw, 320px);
     aspect-ratio: 9 / 16;
-    border-radius: var(--radius); /* Inheriting the 14px radius */
+    border-radius: var(--radius);
+    /* Inheriting the 14px radius */
     overflow: hidden;
-    background-color: #EFE8DC; /* Warm placeholder color */
+    background-color: #EFE8DC;
+    /* Warm placeholder color */
     transition: transform 0.4s ease-in-out;
     display: block;
     text-decoration: none;
@@ -281,8 +351,14 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
+    /* keeps the subject's head in frame on crop */
     display: block;
-    transition: opacity 0.4s ease-in-out;
+    transition: transform 0.5s ease-in-out;
+}
+
+.card-image:hover .short-thumbnail {
+    transform: scale(1.04);
 }
 
 /* Minimalist Play Icon */
@@ -320,7 +396,9 @@ main {
     padding: 6rem 5% 2rem;
 }
 
-.footer h2, .footer h3, .footer h4 {
+.footer h2,
+.footer h3,
+.footer h4 {
     color: var(--bg-color);
 }
 
@@ -408,19 +486,22 @@ main {
         text-align: center;
         padding-top: 4rem;
     }
-    
+
     .hero p {
         margin-left: auto;
         margin-right: auto;
     }
 
-    .project-card.large,
-    .project-card:nth-child(2),
-    .project-card.offset {
+    .project-card.portrait-media,
+    .project-card.landscape-media {
         grid-column: 1 / -1;
-        margin-top: 0;
     }
-    
+
+    .project-card.portrait-media .card-image {
+        aspect-ratio: 3 / 4;
+        /* a touch shorter so it doesn't dominate the mobile scroll */
+    }
+
     .creative-card:nth-child(1),
     .creative-card:nth-child(2),
     .creative-card:nth-child(3) {
@@ -428,15 +509,16 @@ main {
         margin-top: 0;
     }
 
-    .engineering-grid, .creative-grid {
+    .engineering-grid,
+    .creative-grid {
         gap: 4rem;
     }
-    
+
     .footer-content {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
+
     .footer-links {
         justify-content: flex-start;
     }
@@ -447,8 +529,13 @@ main {
         --section-spacing: 80px;
     }
 
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
 
     .nav-links {
         display: none;
@@ -459,7 +546,7 @@ main {
         background-color: var(--bg-color);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         z-index: 100;
     }
 
