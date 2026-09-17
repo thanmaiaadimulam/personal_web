@@ -14,7 +14,10 @@
     --radius: 14px;
     --font-sans: 'DM Sans', sans-serif;
     --container-width: 1200px;
-    --section-spacing: 120px;
+    --section-spacing: clamp(5rem, 8vw, 7.5rem);
+
+    --hero-height: clamp(60dvh, 80dvh, 900px);
+
 }
 
 * {
@@ -47,13 +50,11 @@ h4 {
 }
 
 h1 {
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
 }
 
 h2 {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
 }
 
 h3 {
@@ -181,7 +182,7 @@ main {
     grid-template-columns: 55% 45%;
     gap: 4rem;
     align-items: center;
-    min-height: 80vh;
+    min-height: var(--hero-height);
     padding-top: 2rem;
 }
 
@@ -311,9 +312,11 @@ main {
     display: flex;
     gap: 2.5rem;
     overflow-x: auto;
-    padding: 1rem 0 3rem;
+    padding: 1rem 5vm 3rem;
     /* padding for hover lift and scrollbar */
     margin-top: 3rem;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     /* Custom thin scrollbar */
     scrollbar-width: thin;
     scrollbar-color: rgba(107, 105, 101, 0.2) transparent;
@@ -348,6 +351,8 @@ main {
 }
 
 .short-thumbnail {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -525,18 +530,6 @@ main {
 }
 
 @media (max-width: 768px) {
-    :root {
-        --section-spacing: 80px;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
     /* 1. Navbar: Hamburger menu */
     .navbar {
         padding: 1.5rem 5%;
@@ -583,7 +576,6 @@ main {
     .hero {
         padding-top: 2rem;
         gap: 2rem;
-        min-height: auto;
     }
 
     /* 3. Section 1 (Portfolio Projects): Single-column stack */
